@@ -1,20 +1,29 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Stack } from "react-native";
-import Tab from "./routes/MainContainer";
+import { StyleSheet } from "react-native";
 import MainContainer from "./routes/MainContainer";
-import { mainContainerStyles } from "./additions/HelperStyles";
 import AddExpenses from "./screens/AddExpenses";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { colors } from "./additions/HelperStyles";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const Stack = createNativeStackNavigator();
-
+  // const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="MainContainer" component={MainContainer} />
-        <Stack.Screen name="AddExpenses" component={AddExpenses} />
+        <Stack.Screen
+          name="AddExpenses"
+          component={AddExpenses}
+          options={{
+            headerShown: true,
+            headerTitle: "Add Expenses",
+            headerTintColor: colors.white,
+            headerTitleAlign: "center",
+            headerStyle: { backgroundColor: colors.darkGreen },
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

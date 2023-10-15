@@ -1,14 +1,18 @@
-import { View, Text, Button } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
 import React from "react";
+import { colors, generalStyles } from "../additions/HelperStyles";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 export default function AllExpenses({ navigation }) {
-  const addHandler = () => {
-    navigation.navigate("AddExpenses");
-  };
   return (
     <View>
-      <Text>AllExpenses</Text>
-      <Button title="add" onPress={addHandler} />
+      <Text>hello</Text>
     </View>
   );
 }

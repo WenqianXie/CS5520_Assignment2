@@ -3,79 +3,63 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AllExpenses from "../screens/AllExpenses";
 import AddExpenses from "../screens/AddExpenses";
 import OverbudgetExpenses from "../screens/OverbudgetExpenses";
-import { Ionicons } from "@expo/vector-icons";
-import { colors, mainContainerStyles } from "../additions/HelperStyles";
-import { TouchableOpacity } from "react-native";
-import { createAppContainer } from "react-navigation";
+import { colors } from "../additions/HelperStyles";
+import { FontAwesome } from "@expo/vector-icons";
+import { Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const home = "Home";
-const overbudget = "Overbudget";
 const Tab = createBottomTabNavigator();
 
-function getTabBarIcon(routeName, color, size) {
-  let iconName;
-
-  if (routeName === home) {
-    iconName = "home";
-  } else if (routeName === overbudget) {
-    iconName = "alert";
-  }
-
-  return <Ionicons name={iconName} size={size} color={color} />;
+function addHandler({ navigation }) {
+  // const navigation = useNavigation();
+  navigation.navigate("AddExpenses");
 }
 
-export default function MainContainer() {
-  // const navigation = useNavigation();
-
-  // const navigateToAddExpenses = ({ navigation }) => {
-  //   navigation.navigate("AddExpenses");
-  // };
-
+export default function MainContainer({ navigation }) {
   return (
-    // <NavigationContainer>
     <Tab.Navigator
-      initialRouteNaame={home}
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }) => getTabBarIcon(route.name, color, size),
-        tabBarActiveTintColor: colors.yellow,
-        tabBarInactiveTintColor: colors.grey,
-      })}
+      screenOptions={{
+        headerStyle: { backgroundColor: colors.darkGreen },
+        tabBarStyle: { backgroundColor: colors.darkGreen },
+        headerTitle: "All Expenses",
+        headerTintColor: colors.white,
+        headerTitleAlign: "center",
+        headerRight: ({ color, size }) => (
+          <Pressable onPress={() => addHandler({ navigation })}>
+            <FontAwesome
+              name="plus"
+              size={size}
+              color={colors.white}
+              style={{ marginRight: 20 }}
+            />
+          </Pressable>
+        ),
+        // headerStatusBarHeight: { color: colors.white, marginRight: 10 },
+      }}
+      tabBarOptions={{
+        activeTintColor: colors.yellow,
+        inactiveTintColor: colors.grey,
+      }}
     >
       <Tab.Screen
-        name={home}
+        name="Home"
         component={AllExpenses}
-        options={() => ({
-          tabBarLabel: "Home",
-          // title: "All Expenses",
-          tabBarStyle: mainContainerStyles.tabBar,
-          headerShown: false,
-          // headerStyle: { backgroundColor: colors.darkPurple },
-          // headerTitleAlign: "center",
-          // headerTintColor: colors.white,
-          // headerRight: () => (
-          //   <TouchableOpacity
-          //     onPress={navigateToAddExpenses}
-          //     style={{ marginRight: 15 }}
-          //   >
-          //     <Ionicons name="add" size={20} color={colors.white} />
-          //   </TouchableOpacity>
-          // ),
-        })}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="home" size={size} color={color} />
+          ),
+        }}
       />
       <Tab.Screen
-        name={overbudget}
+        name="Overbudget"
         component={OverbudgetExpenses}
         options={{
-          tabBarLabel: "Overbudget",
-          title: "Overbudget Expenses",
-          tabBarStyle: mainContainerStyles.tabBar,
-          headerStyle: { backgroundColor: colors.darkPurple },
-          headerTitleAlign: "center",
-          headerTintColor: colors.white,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="exclamation" size={size} color={color} />
+          ),
+          headerTitle: "Overbudget Expenses",
         }}
       />
     </Tab.Navigator>
-    // </NavigationContainer>
   );
 }

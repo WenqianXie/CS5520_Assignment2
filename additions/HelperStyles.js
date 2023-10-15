@@ -1,24 +1,43 @@
 import { StyleSheet } from "react-native";
 
 export const colors = {
-  yellow: "#ffd700",
+  yellow: "#f0e68c",
   grey: "#808080",
-  darkPurple: "#4b0082",
-  lightPurple: "#b0c4de",
+  darkGreen: "#5f9ea0",
+  lightGreen: "#f0f8ff",
   white: "#f8f8ff",
 };
-export const gneralStyles = StyleSheet.create({
+export const generalStyles = StyleSheet.create({
   contianer: {
-    backgroundColor: colors.lightPurple,
+    backgroundColor: colors.lightGreen,
+    flex: 1,
   },
-  header: {
-    backgroundColor: colors.darkPurple,
-    // headerTitleAlign: "center",
-    // elevation: 0,
-    // fontSize: 30,
+  // tabBarIcon: {
+  //   color: colors.yellow,
+  //   size: 24,
+  // },
+  headerContianer: {
+    backgroundColor: colors.darkGreen,
+    // flexDirection: "row",
+    // justifyContent: "center",
+    // alignItems: "center",
+    // padding: 20,
+    // paddingTop: 60,
+    // paddingBottom: 10,
+  },
+  headerText: {
+    color: colors.white,
+    alignSelf: "center",
+    fontSize: 25,
+    // marginTop: 60,
+    fontWeight: "bold",
+    // fontFamily: "Aaril",
+  },
+  plusStyle: {
+    marginLeft: 50,
   },
 });
 
 export const mainContainerStyles = StyleSheet.create({
-  tabBar: { backgroundColor: colors.darkPurple },
+  tabBar: { backgroundColor: colors.darkGreen },
 });
