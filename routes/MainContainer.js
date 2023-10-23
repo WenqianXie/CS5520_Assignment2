@@ -1,17 +1,14 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AllExpenses from "../screens/AllExpenses";
-import AddExpenses from "../screens/AddExpenses";
 import OverbudgetExpenses from "../screens/OverbudgetExpenses";
 import { colors } from "../additions/HelperStyles";
 import { FontAwesome } from "@expo/vector-icons";
 import { Pressable } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 
 function addHandler({ navigation }) {
-  // const navigation = useNavigation();
   navigation.navigate("AddExpenses");
 }
 
@@ -20,6 +17,8 @@ export default function MainContainer({ navigation }) {
     <Tab.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: colors.darkGreen },
+        tabBarActiveTintColor: colors.yellow,
+        tabBarInactiveTintColor: colors.grey,
         tabBarStyle: { backgroundColor: colors.darkGreen },
         headerTitle: "All Expenses",
         headerTintColor: colors.white,
@@ -34,11 +33,6 @@ export default function MainContainer({ navigation }) {
             />
           </Pressable>
         ),
-        // headerStatusBarHeight: { color: colors.white, marginRight: 10 },
-      }}
-      tabBarOptions={{
-        activeTintColor: colors.yellow,
-        inactiveTintColor: colors.grey,
       }}
     >
       <Tab.Screen

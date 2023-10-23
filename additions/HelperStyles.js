@@ -3,38 +3,49 @@ import { StyleSheet } from "react-native";
 export const colors = {
   yellow: "#f0e68c",
   grey: "#808080",
-  darkGreen: "#5f9ea0",
-  lightGreen: "#f0f8ff",
+  darkGreen: "#556b2f",
+  lightGreen: "#f5f5dc",
   white: "#f8f8ff",
+  lightYellow: "#fafad2",
 };
 export const generalStyles = StyleSheet.create({
   contianer: {
     backgroundColor: colors.lightGreen,
     flex: 1,
+    alignContent: "center",
   },
-  // tabBarIcon: {
-  //   color: colors.yellow,
-  //   size: 24,
-  // },
-  headerContianer: {
-    backgroundColor: colors.darkGreen,
-    // flexDirection: "row",
-    // justifyContent: "center",
-    // alignItems: "center",
-    // padding: 20,
-    // paddingTop: 60,
-    // paddingBottom: 10,
+  label: {
+    padding: 15,
   },
-  headerText: {
-    color: colors.white,
-    alignSelf: "center",
-    fontSize: 25,
-    // marginTop: 60,
+  labelText: {
+    fontSize: 15,
     fontWeight: "bold",
-    // fontFamily: "Aaril",
+    color: colors.darkGreen,
   },
-  plusStyle: {
-    marginLeft: 50,
+  input: {
+    borderWidth: 1,
+    borderColor: colors.grey,
+    padding: 10,
+    fontSize: 18,
+    borderRadius: 6,
+    marginTop: 10,
+    backgroundColor: colors.lightYellow,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginTop: 200,
+  },
+  button: {
+    backgroundColor: colors.darkGreen,
+    padding: 10,
+    height: 40,
+    width: 100,
+  },
+  buttonText: {
+    color: colors.white,
+    fontSize: 18,
+    alignSelf: "center",
   },
 });
 

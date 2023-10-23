@@ -18,7 +18,7 @@ export default function App() {
           component={AddExpenses}
           options={{
             headerShown: true,
-            headerTitle: "Add Expenses",
+            headerTitle: "Add An Expense",
             headerTintColor: colors.white,
             headerTitleAlign: "center",
             headerStyle: { backgroundColor: colors.darkGreen },
