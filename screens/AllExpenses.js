@@ -4,15 +4,6 @@ import { generalStyles, colors } from "../additions/HelperStyles";
 import { FontAwesome } from "@expo/vector-icons";
 
 export default function AllExpenses({ navigation, expenses }) {
-  // function editHandler({ navigation, expenses }) {
-  //   const expenseData = expenses.map((expense) => ({
-  //     item: expense.item,
-  //     quantity: expense.quantity,
-  //     unitPrice: expense.unitPrice,
-  //   }));
-  //   navigation.navigate("AddExpenses", { expenses: expenseData });
-  // }
-
   return (
     <View style={generalStyles.contianer}>
       <FlatList
@@ -20,7 +11,9 @@ export default function AllExpenses({ navigation, expenses }) {
         keyExtractor={(expense) => expense.id}
         renderItem={({ item }) => (
           <Pressable
-            onPress={() => navigation.navigate("AddExpenses", { route: item })}
+            onPress={() =>
+              navigation.navigate("AddExpenses", { item, title: "Edit" })
+            }
           >
             <View key={item.id} style={generalStyles.expensesList}>
               <Text style={generalStyles.labelText}>{item.item}</Text>

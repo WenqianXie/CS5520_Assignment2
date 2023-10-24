@@ -1,9 +1,10 @@
-import { StyleSheet } from "react-native";
 import MainContainer from "./routes/MainContainer";
 import AddExpenses from "./screens/AddExpenses";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { colors } from "./additions/HelperStyles";
+import { AntDesign } from "@expo/vector-icons";
+import { deleteFromDB } from "./firebase/FirebaseHelper";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,24 +16,28 @@ export default function App() {
         <Stack.Screen
           name="AddExpenses"
           component={AddExpenses}
-          options={{
+          options={({ route, navigation }) => ({
             headerShown: true,
-            headerTitle: "Add An Expense",
+            headerTitle: route?.params?.title || "Add An Expense",
             headerTintColor: colors.white,
             headerTitleAlign: "center",
             headerStyle: { backgroundColor: colors.darkGreen },
-          }}
+            headerRight: () =>
+              route?.params?.title ? (
+                <AntDesign
+                  name="delete"
+                  size={18}
+                  color={colors.white}
+                  style={{ marginRight: 20 }}
+                  onPress={() => {
+                    deleteFromDB(route.params.item.id);
+                    navigation.goBack();
+                  }}
+                />
+              ) : null,
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

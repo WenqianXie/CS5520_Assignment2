@@ -5,13 +5,15 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { writeToDB } from "../firebase/FirebaseHelper";
 
 export default function AddExpenses({ navigation, route }) {
-  const [item, setItem] = useState(null);
-  const [unitPrice, setUnitPrice] = useState(null);
-  const [quantity, setQuantity] = useState(null);
-  // const [item, setItem] = useState(route.params.item.item);
-  // const [unitPrice, setUnitPrice] = useState(route.params.item.unitPrice);
-  // const [quantity, setQuantity] = useState(route.params.item.quantity);
+  const [item, setItem] = useState(route?.params?.item?.item || null);
+  const [unitPrice, setUnitPrice] = useState(
+    route?.params?.item?.unitPrice || null
+  );
+  const [quantity, setQuantity] = useState(
+    route?.params?.item?.quantity || null
+  );
   const total = unitPrice * quantity;
+  const [overbudget, setOverbudget] = useState(500);
   const [isOpen, setIsOpen] = useState(false);
   const [quantities, setQuantities] = useState([
     { label: "1", value: 1 },
@@ -26,12 +28,12 @@ export default function AddExpenses({ navigation, route }) {
     { label: "10", value: 10 },
   ]);
 
-  const cancelHandler = () => {
+  function cancelHandler() {
     setItem(null);
     setUnitPrice(null);
     setQuantity(null);
     navigation.navigate("Home");
-  };
+  }
 
   const saveHandler = () => {
     if (
@@ -47,10 +49,10 @@ export default function AddExpenses({ navigation, route }) {
         unitPrice: unitPrice,
         quantity: quantity,
         total: total,
-        overbudget: total > 500 ? true : false,
+        overbudget: total > overbudget ? true : false,
       };
       console.log(expense);
-      writeToDB(expense);
+      writeToDB(expense, route?.params?.item?.id || null);
       cancelHandler();
       navigation.navigate("Home");
     }
