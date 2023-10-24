@@ -4,10 +4,13 @@ import { generalStyles } from "../additions/HelperStyles";
 import DropDownPicker from "react-native-dropdown-picker";
 import { writeToDB } from "../firebase/FirebaseHelper";
 
-export default function AddExpenses({ navigation }) {
+export default function AddExpenses({ navigation, route }) {
   const [item, setItem] = useState(null);
   const [unitPrice, setUnitPrice] = useState(null);
   const [quantity, setQuantity] = useState(null);
+  // const [item, setItem] = useState(route.params.item.item);
+  // const [unitPrice, setUnitPrice] = useState(route.params.item.unitPrice);
+  // const [quantity, setQuantity] = useState(route.params.item.quantity);
   const total = unitPrice * quantity;
   const [isOpen, setIsOpen] = useState(false);
   const [quantities, setQuantities] = useState([

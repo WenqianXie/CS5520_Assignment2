@@ -52,7 +52,6 @@ export default function MainContainer({ navigation }) {
     >
       <Tab.Screen
         name="Home"
-        // component={AllExpenses}
         options={{
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="home" size={size} color={color} />

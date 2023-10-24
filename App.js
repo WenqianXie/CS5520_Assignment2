@@ -8,7 +8,6 @@ import { colors } from "./additions/HelperStyles";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  // const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
