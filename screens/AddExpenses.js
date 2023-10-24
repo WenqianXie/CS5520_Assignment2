@@ -1,6 +1,6 @@
 import { View, Text, Pressable, TextInput } from "react-native";
 import React, { useState } from "react";
-import { generalStyles, colors } from "../additions/HelperStyles";
+import { generalStyles } from "../additions/HelperStyles";
 import DropDownPicker from "react-native-dropdown-picker";
 import { writeToDB } from "../firebase/FirebaseHelper";
 
@@ -8,6 +8,7 @@ export default function AddExpenses({ navigation }) {
   const [item, setItem] = useState(null);
   const [unitPrice, setUnitPrice] = useState(null);
   const [quantity, setQuantity] = useState(null);
+  const total = unitPrice * quantity;
   const [isOpen, setIsOpen] = useState(false);
   const [quantities, setQuantities] = useState([
     { label: "1", value: 1 },
@@ -42,7 +43,8 @@ export default function AddExpenses({ navigation }) {
         item: item,
         unitPrice: unitPrice,
         quantity: quantity,
-        total: unitPrice * quantity,
+        total: total,
+        overbudget: total > 500 ? true : false,
       };
       console.log(expense);
       writeToDB(expense);
@@ -93,7 +95,11 @@ export default function AddExpenses({ navigation }) {
       </View>
       <View style={generalStyles.label}>
         <Text style={generalStyles.labelText}>Unit Price*</Text>
-        <TextInput style={generalStyles.input} onChangeText={setUnitPrice} />
+        <TextInput
+          style={generalStyles.input}
+          value={unitPrice}
+          onChangeText={setUnitPrice}
+        />
       </View>
       <View style={generalStyles.label}>
         <Text style={generalStyles.labelText}>Quantity*</Text>

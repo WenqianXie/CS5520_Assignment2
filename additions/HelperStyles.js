@@ -47,6 +47,32 @@ export const generalStyles = StyleSheet.create({
     fontSize: 18,
     alignSelf: "center",
   },
+  expensesList: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: colors.grey,
+    padding: 10,
+    marginTop: 15,
+    marginLeft: 15,
+    marginRight: 15,
+    backgroundColor: colors.lightYellow,
+  },
+  expense: {
+    backgroundColor: colors.white,
+    height: 22,
+    width: 70,
+    color: colors.darkGreen,
+    textAlign: "center",
+    fontWeight: "bold",
+    lineHeight: 20,
+  },
+  icon: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 });
 
 export const mainContainerStyles = StyleSheet.create({

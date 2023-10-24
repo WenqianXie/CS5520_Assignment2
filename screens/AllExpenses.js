@@ -1,31 +1,38 @@
-import { View, Text, Pressable } from "react-native";
-import React, { useEffect, useState } from "react";
-import { generalStyles } from "../additions/HelperStyles";
-import { collection, onSnapshot } from "firebase/firestore";
-import { database } from "../firebase/FirebaseSetup";
+import { View, Text, Pressable, FlatList } from "react-native";
+import React from "react";
+import { generalStyles, colors } from "../additions/HelperStyles";
 
-export default function AllExpenses({ navigation }) {
-  const [expenses, setExpenses] = useState([]);
-  useEffect(() => {
-    onSnapshot(collection(database, "expenses"), (querySnapshot) => {
-      if (!querySnapshot.empty) {
-        let newArray = [];
-        querySnapshot.docs.forEach((docSnap) => {
-          newArray.push({ ...docSnap.data(), id: docSnap.id });
-        });
-        setExpenses(newArray);
-      }
-    });
-  }, []);
+import { FontAwesome } from "@expo/vector-icons";
+
+export default function AllExpenses({ navigation, expenses }) {
+  const editHandler = (item) => {
+    navigation.navigate("AddExpenes", { item });
+  };
   return (
-    <View>
-      {expenses.map((expense) => (
-        <View key={expense.id}>
-          <Text>{expense.item}</Text>
-          <Text>{expense.unitPrice}</Text>
-          <Text>{expense.quantity}</Text>
-        </View>
-      ))}
+    <View style={generalStyles.contianer}>
+      <FlatList
+        data={expenses}
+        keyExtractor={(expense) => expense.id}
+        renderItem={({ item }) => (
+          <Pressable onPress={() => editHandler(item)}>
+            <View key={item.id} style={generalStyles.expensesList}>
+              <Text style={generalStyles.labelText}>{item.item}</Text>
+              <View style={generalStyles.icon}>
+                {item.overbudget === true ? (
+                  <FontAwesome
+                    name="warning"
+                    size={18}
+                    color={colors.darkGreen}
+                  />
+                ) : null}
+                <Text style={generalStyles.expense}>
+                  {item.quantity} * {item.unitPrice}
+                </Text>
+              </View>
+            </View>
+          </Pressable>
+        )}
+      />
     </View>
   );
 }
