@@ -34,13 +34,16 @@ export const generalStyles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-evenly",
-    marginTop: 200,
+    position: "absolute",
+    marginTop: 650,
+    marginHorizontal: 60,
   },
   button: {
     backgroundColor: colors.darkGreen,
     padding: 10,
     height: 40,
     width: 100,
+    marginHorizontal: 20,
   },
   buttonText: {
     color: colors.white,
@@ -72,6 +75,12 @@ export const generalStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+  },
+  checkboxContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 180,
+    padding: 30,
   },
 });
 

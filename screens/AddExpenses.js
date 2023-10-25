@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { generalStyles } from "../additions/HelperStyles";
 import DropDownPicker from "react-native-dropdown-picker";
 import { writeToDB } from "../firebase/FirebaseHelper";
+import Checkbox from "expo-checkbox";
 
 export default function AddExpenses({ navigation, route }) {
   const [item, setItem] = useState(route?.params?.item?.item || null);
@@ -27,6 +28,7 @@ export default function AddExpenses({ navigation, route }) {
     { label: "9", value: 9 },
     { label: "10", value: 10 },
   ]);
+  const [isChecked, setIsChecked] = useState(false);
 
   function cancelHandler() {
     setItem(null);
@@ -39,7 +41,10 @@ export default function AddExpenses({ navigation, route }) {
     if (
       validateItem(item) &&
       validateUnitPrice(unitPrice) &&
-      validateQuantity(quantity)
+      validateQuantity(quantity) &&
+      (route?.params?.item?.overbudget === true
+        ? validateIsChecked(isChecked)
+        : true)
     ) {
       setItem(item);
       setUnitPrice(unitPrice);
@@ -72,6 +77,8 @@ export default function AddExpenses({ navigation, route }) {
         cancelHandler();
         navigation.navigate("Home");
       }
+    } else {
+      () => {};
     }
   };
 
@@ -100,6 +107,14 @@ export default function AddExpenses({ navigation, route }) {
   const validateQuantity = () => {
     if (quantity === null) {
       alert("Please enter a valid quantity.");
+      return false;
+    }
+    return true;
+  };
+
+  const validateIsChecked = () => {
+    if (isChecked === false) {
+      alert("Please check the checkbox.");
       return false;
     }
     return true;
@@ -136,6 +151,15 @@ export default function AddExpenses({ navigation, route }) {
           placeholder=""
         />
       </View>
+      {route?.params?.item?.overbudget && (
+        <View style={generalStyles.checkboxContainer}>
+          <Text style={generalStyles.labelText}>
+            This item is marked as overbudget. Select the checkbox if you would
+            like to approve it.
+          </Text>
+          <Checkbox value={isChecked} onValueChange={setIsChecked} />
+        </View>
+      )}
       <View style={generalStyles.buttonContainer}>
         <Pressable style={generalStyles.button} onPress={cancelHandler}>
           <Text style={generalStyles.buttonText}>Cancel</Text>
