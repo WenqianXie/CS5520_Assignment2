@@ -1,4 +1,4 @@
-import { View, Text, Pressable, TextInput } from "react-native";
+import { View, Text, Pressable, TextInput, Alert } from "react-native";
 import React, { useState } from "react";
 import { generalStyles } from "../additions/HelperStyles";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -52,9 +52,26 @@ export default function AddExpenses({ navigation, route }) {
         overbudget: total > overbudget ? true : false,
       };
       console.log(expense);
-      writeToDB(expense, route?.params?.item?.id || null);
-      cancelHandler();
-      navigation.navigate("Home");
+      if (route?.params?.item?.id) {
+        Alert.alert("Important", "Do you want to save the changes?", [
+          {
+            text: "Cancel",
+            onPress: () => {},
+          },
+          {
+            text: "Yes",
+            onPress: () => {
+              writeToDB(expense, route.params.item.id);
+              cancelHandler();
+              navigation.navigate("Home");
+            },
+          },
+        ]);
+      } else {
+        writeToDB(expense, null);
+        cancelHandler();
+        navigation.navigate("Home");
+      }
     }
   };
 

@@ -17,15 +17,24 @@ function addHandler({ navigation }) {
 export default function MainContainer({ navigation }) {
   const [expenses, setExpenses] = useState([]);
   useEffect(() => {
-    onSnapshot(collection(database, "expenses"), (querySnapshot) => {
-      if (!querySnapshot.empty) {
-        let expensesList = [];
-        querySnapshot.docs.forEach((docSnap) => {
-          expensesList.push({ ...docSnap.data(), id: docSnap.id });
-        });
-        setExpenses(expensesList);
+    const unsubscribe = onSnapshot(
+      collection(database, "expenses"),
+      (querySnapshot) => {
+        if (!querySnapshot.empty) {
+          let expensesList = [];
+          querySnapshot.docs.forEach((docSnap) => {
+            expensesList.push({ ...docSnap.data(), id: docSnap.id });
+          });
+          setExpenses(expensesList);
+        } else {
+          setExpenses([]);
+        }
       }
-    });
+    );
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return (

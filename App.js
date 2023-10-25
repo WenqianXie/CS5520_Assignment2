@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { colors } from "./additions/HelperStyles";
 import { AntDesign } from "@expo/vector-icons";
 import { deleteFromDB } from "./firebase/FirebaseHelper";
+import { Alert } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,8 +31,23 @@ export default function App() {
                   color={colors.white}
                   style={{ marginRight: 20 }}
                   onPress={() => {
-                    deleteFromDB(route.params.item.id);
-                    navigation.goBack();
+                    Alert.alert(
+                      "Important",
+                      "Do you want to delete the item?",
+                      [
+                        {
+                          text: "Cancel",
+                          onPress: () => {},
+                        },
+                        {
+                          text: "Yes",
+                          onPress: () => {
+                            deleteFromDB(route.params.item.id);
+                            navigation.navigate("Home");
+                          },
+                        },
+                      ]
+                    );
                   }}
                 />
               ) : null,
