@@ -36,7 +36,7 @@ export const generalStyles = StyleSheet.create({
     justifyContent: "space-evenly",
     position: "absolute",
     marginTop: 650,
-    marginHorizontal: 60,
+    marginHorizontal: 70,
   },
   button: {
     backgroundColor: colors.darkGreen,
