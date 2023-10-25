@@ -9,10 +9,12 @@ export default function AllExpenses({ navigation, expenses }) {
       <FlatList
         data={expenses}
         keyExtractor={(expense) => expense.id}
+        // this is a FlatList to display all the expenses
         renderItem={({ item }) => (
           <Pressable
-            onPress={() =>
-              navigation.navigate("AddExpenses", { item, title: "Edit" })
+            onPress={
+              () => navigation.navigate("AddExpenses", { item, title: "Edit" })
+              // navigate to the AddExpenses screen and pass the item and title as props
             }
           >
             <View key={item.id} style={generalStyles.expensesList}>
@@ -23,7 +25,7 @@ export default function AllExpenses({ navigation, expenses }) {
                     name="warning"
                     size={18}
                     color={colors.darkGreen}
-                  />
+                  /> // if the item is overbudget, display the warning icon, otherwise null
                 ) : null}
                 <Text style={generalStyles.expense}>
                   {item.quantity} * {item.unitPrice}

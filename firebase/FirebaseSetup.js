@@ -11,6 +11,7 @@ import {
   messagingSenderId,
   appId,
 } from "@env";
+// this is a helper function to initialize the app and get the database
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -23,5 +24,5 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export const database = getFirestore(app);
+const app = initializeApp(firebaseConfig); // initialize the app
+export const database = getFirestore(app); // reference to the database

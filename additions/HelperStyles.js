@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+// this is a helper file to store all the styles that are used in multiple files
 
 export const colors = {
   yellow: "#f0e68c",
@@ -35,7 +36,7 @@ export const generalStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     position: "absolute",
-    marginTop: 580,
+    marginTop: 575,
     marginHorizontal: 70,
   },
   button: {
@@ -83,8 +84,4 @@ export const generalStyles = StyleSheet.create({
     marginTop: 150,
     padding: 30,
   },
-});
-
-export const mainContainerStyles = StyleSheet.create({
-  tabBar: { backgroundColor: colors.darkGreen },
 });

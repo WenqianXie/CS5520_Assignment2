@@ -8,6 +8,7 @@ export default function OverbudgetExpenses({ navigation, expenses }) {
     <View style={generalStyles.contianer}>
       <FlatList
         data={expenses.filter((item) => item.overbudget)}
+        // this is a FlatList to display the expenses that are overbudget (filter the expenses array to get the expenses that are overbudget)
         keyExtractor={(expense) => expense.id}
         renderItem={({ item }) => (
           <Pressable
@@ -32,5 +33,5 @@ export default function OverbudgetExpenses({ navigation, expenses }) {
         )}
       />
     </View>
-  );
+  ); // the rest same as AllExpenses.js
 }
