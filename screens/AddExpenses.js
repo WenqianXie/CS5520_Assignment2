@@ -122,7 +122,7 @@ export default function AddExpenses({ navigation, route }) {
 
   return (
     <View style={generalStyles.contianer}>
-      <View style={[generalStyles.label, { marginTop: 50 }]}>
+      <View style={[generalStyles.label, { marginTop: 20 }]}>
         <Text style={generalStyles.labelText}>Items*</Text>
         <TextInput
           style={generalStyles.input}

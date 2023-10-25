@@ -35,7 +35,7 @@ export const generalStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     position: "absolute",
-    marginTop: 650,
+    marginTop: 580,
     marginHorizontal: 70,
   },
   button: {
@@ -49,6 +49,7 @@ export const generalStyles = StyleSheet.create({
     color: colors.white,
     fontSize: 18,
     alignSelf: "center",
+    marginHorizontal: 10,
   },
   expensesList: {
     flexDirection: "row",
@@ -79,7 +80,7 @@ export const generalStyles = StyleSheet.create({
   checkboxContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: 180,
+    marginTop: 150,
     padding: 30,
   },
 });
