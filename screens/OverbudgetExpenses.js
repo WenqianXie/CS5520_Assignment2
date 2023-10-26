@@ -1,9 +1,10 @@
 import { View, Text, FlatList, Pressable } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { generalStyles, colors } from "../additions/HelperStyles";
 import { FontAwesome } from "@expo/vector-icons";
 
 export default function OverbudgetExpenses({ navigation, expenses }) {
+  const [pressedItem, setPressedItem] = useState(null);
   return (
     <View style={generalStyles.contianer}>
       <FlatList
@@ -15,8 +16,16 @@ export default function OverbudgetExpenses({ navigation, expenses }) {
             onPress={() =>
               navigation.navigate("AddExpenses", { item, title: "Edit" })
             }
+            onPressIn={() => setPressedItem(item.id)} // set the pressed item to the id of the item that is pressed
+            onPressOut={() => setPressedItem(null)} // set the pressed item to null when the press is released
           >
-            <View key={item.id} style={generalStyles.expensesList}>
+            <View
+              key={item.id}
+              style={[
+                generalStyles.expensesList,
+                { opacity: pressedItem === item.id ? 0.5 : 1 },
+              ]}
+            >
               <Text style={generalStyles.labelText}>{item.item}</Text>
               <View style={generalStyles.icon}>
                 <FontAwesome
@@ -25,7 +34,8 @@ export default function OverbudgetExpenses({ navigation, expenses }) {
                   color={colors.darkGreen}
                 />
                 <Text style={generalStyles.expense}>
-                  {item.quantity} * {item.unitPrice}
+                  {item.quantity} * {item.unitPrice} ={" "}
+                  {item.quantity * item.unitPrice}
                 </Text>
               </View>
             </View>

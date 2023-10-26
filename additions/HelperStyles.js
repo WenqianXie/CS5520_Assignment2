@@ -63,6 +63,7 @@ export const generalStyles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
     backgroundColor: colors.lightYellow,
+    opacity: 1,
   },
   expense: {
     backgroundColor: colors.white,

@@ -38,6 +38,9 @@ export default function AddExpenses({ navigation, route }) {
   // it uses a dropdown picker to select the quantity
   const [isChecked, setIsChecked] = useState(false);
   // this is a state variable to store the checkbox value
+  // const [pressedButton, setPressedButton] = useState(null);
+  const [isCancelPressed, setIsCancelPressed] = useState(false);
+  const [isSavePressed, setIsSavePressed] = useState(false);
 
   function cancelHandler() {
     setItem(null);
@@ -183,10 +186,30 @@ export default function AddExpenses({ navigation, route }) {
         // if the item is overbudget, show a checkbox to approve it
       )}
       <View style={generalStyles.buttonContainer}>
-        <Pressable style={generalStyles.button} onPress={cancelHandler}>
+        <Pressable
+          style={[
+            generalStyles.button,
+            isCancelPressed && { opacity: 0.5 }, // set the opacity based on the pressed button
+          ]}
+          onPress={() => {
+            cancelHandler();
+          }}
+          onPressIn={() => setIsCancelPressed(true)}
+          onPressOut={() => setIsCancelPressed(false)}
+        >
           <Text style={generalStyles.buttonText}>Cancel</Text>
         </Pressable>
-        <Pressable style={generalStyles.button} onPress={saveHandler}>
+        <Pressable
+          style={[
+            generalStyles.button,
+            isSavePressed && { opacity: 0.5 }, // set the opacity based on the pressed button
+          ]}
+          onPress={() => {
+            saveHandler();
+          }}
+          onPressIn={() => setIsSavePressed(true)}
+          onPressOut={() => setIsSavePressed(false)}
+        >
           <Text style={generalStyles.buttonText}>Save</Text>
         </Pressable>
         {/* these are buttons to cancel or save the item */}
