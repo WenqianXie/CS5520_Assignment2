@@ -34,8 +34,7 @@ export default function OverbudgetExpenses({ navigation, expenses }) {
                   color={colors.darkGreen}
                 />
                 <Text style={generalStyles.expense}>
-                  {item.quantity} * {item.unitPrice} ={" "}
-                  {item.quantity * item.unitPrice}
+                  {item.quantity} * {item.unitPrice}
                 </Text>
               </View>
             </View>
